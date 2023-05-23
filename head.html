@@ -1,4 +1,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>
+  ;(function(win, doc, style, timeout) {
+  var STYLE_ID = 'at-body-style';
+
+  function getParent() {
+    return doc.getElementsByTagName('head')[0];
+  }
+
+  function addStyle(parent, id, def) {
+    if (!parent) {
+      return;
+    }
+
+    var style = doc.createElement('style');
+    style.id = id;
+    style.innerHTML = def;
+    parent.appendChild(style);
+  }
+
+  function removeStyle(parent, id) {
+    if (!parent) {
+      return;
+    }
+
+    var style = doc.getElementById(id);
+
+    if (!style) {
+      return;
+    }
+
+    parent.removeChild(style);
+  }
+
+  addStyle(getParent(), STYLE_ID, style);
+  setTimeout(function() {
+    removeStyle(getParent(), STYLE_ID);
+  }, timeout);
+}(window, document, "body {opacity: 0 !important}", 3000));
+</script>
 <script src="https://assets.adobedtm.com/0b0cdf7628b5/9fb26bea17f0/launch-EN0fcd200505004ac2bf93e18b9ff42d35.min.js" async></script>
 <script src="/scripts/lib-franklin.js" type="module"></script>
 <script src="/scripts/scripts.js" type="module"></script>
